@@ -1,0 +1,28 @@
+header {
+	height: 266px;
+	background-image: url(../images/headerBack.jpg);
+	background-repeat: repeat;
+	overflow: hidden;
+	position: relative;
+}
+
+header > div {
+	margin: 0;
+}
+
+#imDiv {
+	width: 500px;
+	margin: 0 0 0 75px;
+	position: absolute;
+}
+
+#pageTitle {
+	margin-top: 25px;
+	position: absolute;
+	left: 825px;
+}
+
+h1 {
+	font-family: 'Bangers', cursive;
+	font-size: 170px;
+}
