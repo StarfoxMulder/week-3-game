@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hang The Punk</title>
+	<link rel="icon" type="image/png" href="assets/images/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<script src="https://use.fontawesome.com/a61d82420f.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -15,25 +16,29 @@
 </head>
 <body class="container">
 	<header class="row">
-		<div id="imDiv" class="col-md-4 col-md-offset-1">
+		<div id="imDiv" class="col-md-3 col-md-offset-1">
 			<img src="assets/images/punkLegs3.jpg">
 		</div>
-		<div id="pageTitle" class="col-md-6 col-sm-12 col-md-offset-1">
-			<h1>Hang the punk</h1> <!-- Look at Jumbotron and other bootstrap default elements -->
+		<div id="pageTitle" class="col-md-4 col-sm-12 col-md-offset-1">
+			<h1>Hang the punk</h1>
 		</div>
 	</header>
 	<main>
 		<div id="content">
+		  <div class="rowalertPlaceholder">
+		  </div>
+		  <div class="row">
 			<div id="hangmanImgDiv">
 				<img id="hangmanIcon" src="assets/images/10.jpg">
 			</div>
+		  </div>
 
-			<div id="gameInfoDiv">
-				<div class="gIDTop">
-				</div>
-				<div class="gIDBottom">
-				</div>
+		  <div id="gameInfoDiv">
+			<div class="gIDTop">
 			</div>
+			<div class="gIDBottom">
+			</div>
+		  </div>
 
 		</div>
 	</main>
@@ -42,3 +47,10 @@
 	</footer>
 </body>
 </html>
+
+<!--
+		  <div class="row">
+		    <div>
+		    </div>
+		  </div>
+-->
