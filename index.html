@@ -23,24 +23,31 @@
 			<h1>Hang the punk</h1>
 		</div>
 	</header>
-	<main>
-		<div id="content">
-		  <div class="rowalertPlaceholder">
-		  </div>
-		  <div class="row">
-			<div id="hangmanImgDiv">
-				<img id="hangmanIcon" src="assets/images/10.jpg">
-			</div>
-		  </div>
-
-		  <div id="gameInfoDiv">
-			<div class="gIDTop">
-			</div>
-			<div class="gIDBottom">
-			</div>
-		  </div>
-
+	<main class="row">
+		
+		<div class="col-md-4" id="hangmanImgDiv">
+			<img id="hangmanIcon" src="assets/images/10.jpg">
 		</div>
+
+		<div class="col-md-4" id="gameInfoDiv">
+			<div class="row gIDTop">
+				<div class="row" id="winsRounds">
+					<p>WINS: <p id="wC"></p></p>
+					<p>ROUNDS: <p id="rC"></p></p>
+				</div>
+				<div class="row" id="userAlert">
+				</div>
+				<div class="row" id="placeholderRow">
+					<div id="currentGuessStatus"></div>
+				</div>
+			</div>
+			<div class="row gIDBottom">
+				<div class="row" id="wrongGuessBox">
+				</div>
+				<div class="row" id="guessRemain">
+				</div>
+			</div>
+	     </div>
 	</main>
 	<footer>
 		<p>Warning: Listening to punk may lead to self-actualization and creativity.</p>
