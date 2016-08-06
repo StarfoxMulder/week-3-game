@@ -1,28 +1,100 @@
+body {
+	margin: 0 0 0 0;
+	width: 100%;
+}
+
+.container {
+	margin: 0 0 0 0;
+	width: 100%;
+
+}
+
 header {
-	height: 266px;
+	height: 260px;
 	background-image: url(../images/headerBack.jpg);
 	background-repeat: repeat;
 	overflow: hidden;
-	position: relative;
 }
 
 header > div {
-	margin: 0;
+	margin: 0 0 0 0;
 }
 
 #imDiv {
-	width: 500px;
+	height: 260px;
 	margin: 0 0 0 75px;
-	position: absolute;
+	overflow: hidden;
 }
 
 #pageTitle {
 	margin-top: 25px;
-	position: absolute;
-	left: 825px;
 }
 
 h1 {
 	font-family: 'Bangers', cursive;
 	font-size: 170px;
+}
+
+/* Main Section */
+
+main {
+}
+
+#content {
+	width: 100%;
+	margin: 75px 75px;
+	position: relative;
+	overflow: auto;
+}
+
+#hangmanImgDiv {
+	border: 2px solid black;
+	height: 750px;
+	width: 500px;
+	float: left;
+}
+
+#hangmanIcon {
+	height: 750px;
+	width: 500px;	
+}
+
+#gameInfoDiv {
+	border: 2px solid black;
+	float: right;
+	height: 750px;
+	width: 700px;
+}
+
+#gIDTop {
+	border: 2px solid black;
+	height: 375px;
+}
+
+#gIDBottom {
+	border: 2px solid black;
+	height: 375px;
+}
+
+/* Footer Section */
+footer {
+	background-image: url(../images/headerBack.jpg);
+	background-repeat: repeat;
+	overflow: hidden;
+	opacity: .65;
+	clear: both;
+	margin-top: 25px;
+}
+
+footer > p {
+	font-size: 80%;
+	text-align: center;
+}
+
+
+
+@media screen (max-width: 950px) {
+	#imDiv {
+		display: none;
+	}
 }
