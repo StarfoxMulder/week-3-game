@@ -69,12 +69,14 @@ var userGuess = "";
 var userWins = 0;
 var userLoses = 0;
 var totalRounds = 0;
-var correctGuesses = []; //array for letters which are correct, but already guessed this round
-var wrongGuesses = []; //for displaying letters which were guessed, but are not correct for this round
+var correctGuesses = []; //POSSIBLE DELETE -- array for letters which are correct, but already guessed this round
+var wrongGuesses = ""; //for displaying letters which were guessed, but are not correct for this round
 var currentBandIndex = 0;
-var nameDisplayedToUser = ""; //string to display user progress toward completed word after each guess iteration
-var guessesRemaining = 10;
-var phase = "defaultView"
+var currentBand = "";
+var puzzleProgress = ""; //string to display user progress toward completed word after each guess iteration
+var missesRemaining = 10;
+var hangmanImageCounter = 0;
+var phase = "defaultView";
 
 readyScreen();
 
@@ -92,12 +94,12 @@ document.onkeyup = function(event) {
 			gameSetUp();
 
 		case "playing":
-			nameGuessUpdate();
+			nameGuessUpdate(userGuess);
 
 
 		case "nextBandRound":
 	}
-}
+};//closeout switchcase
 
 
 //Default before game is initiated by the user or after they have quit
@@ -110,11 +112,11 @@ function readyScreen () {
 		document.getElementById("lC").innerHTML = userLoses;
 		document.getElementById("rC").innerHTML = totalRounds;
 		document.getElementById("wrongGuessBox").innerHTML = "";
-		document.getElementById("guessRemain").innerHTML = guessesRemaining;
+		document.getElementById("missRemain").innerHTML = missesRemaining;
 
 		phase = "beginGame";
 
-}
+}; //closeout readyScreen
 
 
 
@@ -124,12 +126,13 @@ function gameSetUp () {
 
 //Selecting a random band from the array for this round of hangman
 	currentBandIndex = Math.floor(Math.random()* band.length + 1);
-	var currentBand = band[currentBandIndex];
+	currentBand = band[currentBandIndex];
 	
 	document.getElementById("songDeck").setAttribute("src", currentBand.mp3File);
 
 //default values/reset from previous round
 	guessesRemaining = 10;
+	wrongGuesses = "";
 	document.getElementById("userAlert").style.visibility = "hidden";
 	document.getElementById("userAlert").innerHTML = "";
 	document.getElementById("userAlert").setAttribute("height", "0px");
@@ -138,14 +141,110 @@ function gameSetUp () {
 	document.getElementById("rC").innerHTML = totalRounds;
 	document.getElementById("playerConsole").innerHTML = "<h2>WHAT BAND IS THIS?</h2>";
 	document.getElementById("currentGuessStatus").innerHTML = currentBand.placeholder;
-	document.getElementById("guessRemain").innerHTML = guessesRemaining;
+	document.getElementById("missRemain").innerHTML = guessesRemaining;
 	document.getElementById("wrongGuessBox").innerHTML = "";
 	document.getElementById("hangmanIcon").setAttribute("src", "assets/images/0.jpg")
+	document.getElementById("wrongGuessBox").innerHTML = wrongGuesses;
 
 	phase = "playing";
+}; //closeout gameSetUp
+
+//The actual playing of the game - reading user input, passing it through
+//this function to: test if the user guess character is in the band name --
+//if so - replace appropriate placeholder with user guess char
+//      - if puzzle is completed; initiate round restart, ++ wins, ++ rounds
+//if not - ++ the hangman image #, add user guess to The Gutter, -- remaing guesses
+//       - if no misses remain;  
+function nameGuessUpdate (userGuess) {
+	var answer = currentBand.name;
+	var puzzleProgress = currentBand.placeholder;
+	var indexOfHits = [];
+
+for(var i = 0; i < answer.length; i++) {
+	if (userGuess == answer.charAt(i)) {
+		indexOfHits.push(i);
+	}
 }
 
+if (indexOfHits.length == 0){
+	hangmanImageCounter++;
+	missesRemaining--;
+	wrongGuesses = wrongGuesses += userGuess;
+
+	document.getElementById("lC").innerHTML = userLoses;
+	document.getElementById("rC").innerHTML = totalRounds;
+}
+
+if (missesRemaining == 0) {
+	hangmanImageCounter++;
+/*	hangmanIcon.animate({
+		width: 1000%;
+		height: 1000%;
+
+
+	}); */
+	phase = "beginGame";
+	totalRounds++;
+	userLoses++;
+}
+
+if (answer == puzzleProgress) {
+	userWins++;
+	rounds++;
+	phase = "beginGame";
+
+	document.getElementById("wC").innerHTML = userWins;
+}
+
+}; //closeout nameGuessUpdate
+
 };
+/*
+	for(var i = 0; i < answer.length; i++) {
+		if (userGuess == answer.charAt(i)) {
+			puzzleProgress.chatAt(i) = userGuess;
+		} else (){
+
+		}
+
+	}
+
+}
+
+var indexOfHits = [];
+
+for(var i = 0; i < answer.length; i++) {
+	if (userGuess == answer.charAt(i)) {
+		indexOfHits.push(i);
+	}
+}
+
+if (indexOfHits.length == 0){
+	hangmanImageCounter++;
+	missesRemaining--;
+	wrongGuesses.push(userGuess);
+}
+
+if (missesRemaining == 0) {
+	hangmanImageCounter++;
+	hangmanIcon.animate({
+		width: 1000%;
+		height: 1000%;
+
+
+	});
+	phase = "beginGame";
+	rounds++;
+	userLoses++;
+}
+
+if (answer == puzzleProgress) {
+	wins++;
+	rounds++;
+	phase = "beginGame";
+}
+*/
+
 
 
 

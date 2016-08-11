@@ -55,6 +55,7 @@ main {
 #hangmanIcon {
 	height: 742px;
 	width: 100%
+	z-index: 4;
 }
 
 #gameInfoDiv {
@@ -122,7 +123,7 @@ h2 {
 	height: 100px;
 }
 
-#guessRemain {
+#missRemain {
 	height:90px;
 }
 
