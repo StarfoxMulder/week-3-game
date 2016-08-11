@@ -67,24 +67,32 @@ var band = [
 // Declaring game variables
 var userGuess = "";
 var userWins = 0;
-var wrongGuesses = [];
+var userLoses = 0;
 var totalRounds = 0;
-var currentBand = "";
+var correctGuesses = []; //array for letters which are correct, but already guessed this round
+var wrongGuesses = []; //for displaying letters which were guessed, but are not correct for this round
+var currentBandIndex = 0;
+var nameDisplayedToUser = ""; //string to display user progress toward completed word after each guess iteration
 var guessesRemaining = 10;
-var step = "beginGame"
+var phase = "defaultView"
+
+readyScreen();
 
 //switch case controlling gameflow
 document.onkeyup = function(event) {
 	userGuess = String.fromCharCode(event.keyCode).toUpperCase();
 
-	switch(step) {
+	switch(phase) {
 
-		case "endGame":
+		case "defaultView":
+			readyScreen();
 			break;
 
 		case "beginGame":
-			songSetUp();
-			songSelection();
+			gameSetUp();
+
+		case "playing":
+			nameGuessUpdate();
 
 
 		case "nextBandRound":
@@ -92,27 +100,60 @@ document.onkeyup = function(event) {
 }
 
 
-//Choosing a random song to play the game with
-function songSelection() {
-	var ranSongIndex = math.floor(Math.random()* band.length +1);
-	var currentBand = band.indexOF(ranSongIndex);
-	currentBand.mp3File.play();
+//Default before game is initiated by the user or after they have quit
+function readyScreen () {
+
+		document.getElementById("userAlert").style.visibility = "visible";
+		document.getElementById("userAlert").setAttribute("height", "300px");
+		document.getElementById("userAlert").innerHTML = "<br><br><h2> PRESS ANY KEY TO START</h2><br><h2>YOU MAY ENTER $ AT ANY TIME TO QUIT.</h2>";
+		document.getElementById("wC").innerHTML = userWins;
+		document.getElementById("lC").innerHTML = userLoses;
+		document.getElementById("rC").innerHTML = totalRounds;
+		document.getElementById("wrongGuessBox").innerHTML = "";
+		document.getElementById("guessRemain").innerHTML = guessesRemaining;
+
+		phase = "beginGame";
+
 }
 
 
-// Game Initiation starts from default switch case
-function songSetUp () {
+
+// Game Initiation
+
+function gameSetUp () {
+
+//Selecting a random band from the array for this round of hangman
+	currentBandIndex = Math.floor(Math.random()* band.length + 1);
+	var currentBand = band[currentBandIndex];
+	
+	document.getElementById("songDeck").setAttribute("src", currentBand.mp3File);
+
+//default values/reset from previous round
+	guessesRemaining = 10;
+	document.getElementById("userAlert").style.visibility = "hidden";
+	document.getElementById("userAlert").innerHTML = "";
+	document.getElementById("userAlert").setAttribute("height", "0px");
 	document.getElementById("wC").innerHTML = userWins;
+	document.getElementById("lC").innerHTML = userLoses;
 	document.getElementById("rC").innerHTML = totalRounds;
-	document.getElementById("userAlert").innerHTML = "<p>WHAT BAND IS THIS?</p>";
+	document.getElementById("playerConsole").innerHTML = "<h2>WHAT BAND IS THIS?</h2>";
+	document.getElementById("currentGuessStatus").innerHTML = currentBand.placeholder;
 	document.getElementById("guessRemain").innerHTML = guessesRemaining;
+	document.getElementById("wrongGuessBox").innerHTML = "";
+	document.getElementById("hangmanIcon").setAttribute("src", "assets/images/0.jpg")
+
+	phase = "playing";
 }
+
+};
+
 
 
 // Updating the current progress of the user's guesses
+/*
 function nameGuessUpdate() {
 	if(!endGame){
-		
+
 		if () {
 			wrongGuesses.push(userGuess);
 			for(var i=0, i < currentBandName.length; i++) {
@@ -127,50 +168,27 @@ function nameGuessUpdate() {
 
 		if (remainingLetters <= 0) {
 			userWins++;
-			step = "nextBandRound";
+			phase = "nextBandRound";
 			document.getElementById("wC").innerHTML = wC;
 		}
 	}
 }
+var letIndices = [];
+var let = currentBandName.indexOF(userGuess);
 
-document.onkeyup = function(event) {
-	userGuess = String.fromCharCode(event.keyCode).toUpperCase();
+ if (let == -1) {
+	run the Wrong Guess functions
+	  increment up hangman img counter
+	  push userGuess to wrongGuesses array
 
-	switch(step) {
-
-		case "endGame":
-			break;
-
-		case "beginGame":
-
-		case "nextBandRound":
-	}
-}
-
-
-
-
-
-
-
-
-		document.getElementById("userAlert").innerHTML = "<p> PRESS ANY KEY TO START<p><br><p>YOU MAY ENTER $ AT ANY TIME TO QUIT.</p>";
-		document.getElementById("wC").innerHTML = userWins;
-		document.getElementById("rC").innerHTML = totalRounds;
-		document.getElementById("userAlert").innerHTML
-		document.getElementById("").innerHTML
-		songSelector;
-
-
-
-		document.getElementById("userAlert").innerHTML
-		document.getElementById("userAlert").innerHTML
-		document.getElementById("userAlert").innerHTML
-		document.getElementById("userAlert").innerHTML
-
+ } else () {
+	while (let != -1) {
+	  letIndices.push(let);
+	  let = currentBandName.indexOF(userGuess, let + 1)
 	}
 
-};
-
+ }
+ 
+*/
 
 
